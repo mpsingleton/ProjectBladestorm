@@ -8,6 +8,7 @@ public class TileGenerator : MonoBehaviour
     public string myName;
     public int myAge;
     public int rowCount = 6;
+    public int columnCount = 6;
     public GameObject gridSquare;
     public Transform placer;
 
@@ -29,7 +30,19 @@ public class TileGenerator : MonoBehaviour
         placer.position += Vector3.right;
     }
 
-    void PlaceSquare()
+    void PositionPlacerY()
+    {
+        placer.position += Vector3.down;
+    }
+
+    void PlaceSquareX()
+    {
+        GameObject newSquare;
+        newSquare = Instantiate(gridSquare, placer.position, placer.rotation);
+        newSquare.transform.parent = transform;
+    }
+
+    void PlaceSquareY()
     {
         GameObject newSquare;
         newSquare = Instantiate(gridSquare, placer.position, placer.rotation);
@@ -40,8 +53,15 @@ public class TileGenerator : MonoBehaviour
     {
         for (int i = 0; i < rowCount; i++)
         {
-            PlaceSquare();
+            PlaceSquareX();
             PositionPlacerX();
+        }
+
+        for (int i = 0; i < columnCount; i++)
+        {
+            Debug.Log("Hello world!");
+            PlaceSquareY();
+            PositionPlacerY();
         }
     }
 
