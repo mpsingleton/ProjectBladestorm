@@ -25,9 +25,9 @@ public class TileGenerator : MonoBehaviour
         
     }
 
-    void PositionPlacerX()
+    void PositionPlacerX(Vector3 posUpdate)
     {
-        placer.position += Vector3.right;
+        placer.position += posUpdate;
     }
 
     void PositionPlacerY()
@@ -54,13 +54,22 @@ public class TileGenerator : MonoBehaviour
         for (int i = 0; i < rowCount; i++)
         {
             PlaceSquareX();
-            PositionPlacerX();
+            PositionPlacerX(Vector3.right);
         }
+
+        PositionPlacerX(Vector3.left * rowCount);
+
 
         for (int i = 0; i < columnCount; i++)
         {
-            Debug.Log("Hello world!");
-            PlaceSquareY();
+            for (int q = 0; q < rowCount; q++)
+            {
+                PlaceSquareX();
+                PositionPlacerX(Vector3.right);
+            }
+
+            PositionPlacerX(Vector3.left * rowCount);
+            //PlaceSquareY();
             PositionPlacerY();
         }
     }
